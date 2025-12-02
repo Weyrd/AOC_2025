@@ -1,6 +1,6 @@
 from typing import List
 import math
-from utils import get_input_file_from_script_file, deep_copy_arg, solution_print
+from utils import get_input_file_from_script_file, deep_copy_arg, solution_print, clock
 
 
 @deep_copy_arg()
@@ -41,13 +41,14 @@ def part_two_solution(lines: List[str]) -> int:
             position = end_pos % 100
 
     return hit_0
-
 def run():
+    clock.start('data_loading')
     file = get_input_file_from_script_file(__file__)
     lines = [line.strip() for line in file.readlines()]
+    clock.stop('data_loading', 'Data loading time')
 
-    solution_print(1, part_one_solution(lines))
-    solution_print(2, part_two_solution(lines))
+    solution_print(1, lambda: part_one_solution(lines))
+    solution_print(2, lambda: part_two_solution(lines))
 
 if __name__ == "__main__":
     run()
