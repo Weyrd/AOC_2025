@@ -1,15 +1,8 @@
-from io import TextIOWrapper
 from typing import List
-from utils import get_input_file_from_script_file, deep_copy_arg, solution_print, clock
+from utils import load_input, deep_copy_arg, solution_print, parse_digit_grid
 import heapq
 
 lines_type = list[list[int]]
-
-
-def prepare_data(file: TextIOWrapper) -> lines_type:
-    lines = file.readlines()
-    lines = [[int(num) for num in line.strip()] for line in lines]
-    return lines
 
 
 @deep_copy_arg()
@@ -57,10 +50,7 @@ def part_two_solution(lines: lines_type, battery_num: int) -> int:
 
 
 def run():
-    clock.start('data_loading')
-    file = get_input_file_from_script_file(__file__)
-    data = prepare_data(file)
-    clock.stop('data_loading', 'Data loading time')
+    data = load_input(__file__, parse_digit_grid)
 
     solution_print(1, lambda: part_two_solution(data, 2)) # part 2 is more opti, i keep part 1 for reference
     solution_print(2, lambda: part_two_solution(data, 12))
