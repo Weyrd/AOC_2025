@@ -192,6 +192,28 @@ def parse_grid_with_positions(file: TextIOWrapper,
     return grid, positions
 
 
+def parse_grid_to_positions(file: TextIOWrapper) -> Tuple[Tuple[int, int], List[List[str]], Dict[Tuple[int, int], str]]:
+    """
+    Parse grid and return a dictionary mapping positions to characters.
+    
+    Returns: {(row, col): char, ...}
+    
+    Example input:
+        .#.
+        #.#
+    Returns: {sizegrid, gird, (0,0): '.', (0,1): '#', (0,2): '.', (1,0): '#', (1,1): '.', (1,2): '#'}
+    """
+    grid = [[char for char in line.strip()] for line in file.readlines()]
+    sizegrid = (len(grid), len(grid[0]) if grid else 0)
+    positions = {}
+    
+    for row in range(len(grid)):
+        for col in range(len(grid[row])):
+            positions[(row, col)] = grid[row][col]
+    
+    return sizegrid, grid, positions
+
+
 def parse_custom(file: TextIOWrapper, 
                 line_parser: Callable[[str], T]) -> List[T]:
     """

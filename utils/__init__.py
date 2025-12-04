@@ -1,6 +1,7 @@
 from .input import get_input_file_from_script_file
 from .decorators import deep_copy_arg
 from .solution_print import solution_print
+from .map import MapUtils, DIRECTION_TYPE, CornersPositions, NSEWPositions, AroundPositions
 from .clock import clock
 from .parsers import (
     load_input,
